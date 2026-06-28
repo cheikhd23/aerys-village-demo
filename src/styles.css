@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color: #17201d; background: #f4efe6; font-synthesis: none; }
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 72px; }
+body { margin: 0; min-width: 320px; overflow-x: hidden; font-family: Manrope, Arial, sans-serif; background: #f4efe6; }
+::selection { background: #b99a62; color: #17372e; }
+
+@layer base {
+  a { @apply transition-colors duration-300; }
+  input, select, textarea, button { font: inherit; }
+}
+
+@layer components {
+  .section-pad { @apply py-20 md:py-28 lg:py-36; }
+  .eyebrow { @apply text-[10px] font-semibold uppercase tracking-[0.3em] text-terracotta; }
+  .section-title { @apply font-display text-[clamp(3rem,5.5vw,5.8rem)] font-medium leading-[.9] tracking-[-0.04em] text-forest; }
+  .section-title em { @apply font-normal text-terracotta; }
+  .nav-link { @apply relative text-[10px] font-semibold uppercase tracking-[.16em] opacity-80 hover:opacity-100; }
+  .nav-link::after { content: ''; @apply absolute -bottom-2 left-0 h-px w-0 bg-current transition-all duration-300; }
+  .nav-link:hover::after { @apply w-full; }
+  .button-primary { @apply inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-sand px-7 text-[10px] font-semibold uppercase tracking-[.14em] text-forest transition duration-300 hover:bg-white; }
+  .button-ghost { @apply inline-flex min-h-14 items-center justify-center rounded-full border border-white/40 px-7 text-[10px] font-semibold uppercase tracking-[.14em] text-white transition duration-300 hover:border-white hover:bg-white hover:text-forest; }
+  .button-dark { @apply inline-flex min-h-14 shrink-0 items-center justify-center gap-3 rounded-full bg-forest px-7 text-[10px] font-semibold uppercase tracking-[.14em] text-white transition hover:bg-pine; }
+  .round-link { @apply grid h-14 w-14 shrink-0 place-items-center rounded-full border border-forest/25 text-forest transition hover:border-forest hover:bg-forest hover:text-white; }
+  .experience-card { @apply relative min-h-[480px] overflow-hidden; }
+  .form-label { @apply text-[9px] font-semibold uppercase tracking-[.17em] text-ink/55; }
+  .form-input { @apply mt-2 w-full border-0 border-b border-forest/20 bg-transparent px-0 py-3 text-sm font-normal normal-case tracking-normal text-ink outline-none transition placeholder:text-ink/30 focus:border-terracotta focus:ring-0; }
+  .footer-title { @apply text-[10px] font-semibold uppercase tracking-[.22em] text-sand; }
+}
+
+.hero-scene { opacity: 0; transform: scale(1.04); animation: hero-film 24s infinite; }
+.hero-scene-1 { animation-delay: 0s; }
+.hero-scene-2 { animation-delay: 8s; }
+.hero-scene-3 { animation-delay: 16s; }
+.hero-grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
+.hero-booking-field { @apply flex min-h-16 flex-col justify-center border-b border-forest/10 px-5 sm:min-h-20 sm:border-b-0 sm:border-r; }
+.hero-booking-field span { @apply text-[8px] font-semibold uppercase tracking-[.22em] text-terracotta; }
+.hero-booking-field strong { @apply mt-1 font-display text-lg font-medium; }
+.room-image-enter { animation: room-reveal .8s cubic-bezier(.2,.7,.2,1); }
+
+@keyframes hero-film {
+  0%, 30% { opacity: 1; transform: scale(1.04); }
+  36%, 100% { opacity: 0; transform: scale(1.11); }
+}
+@keyframes room-reveal {
+  from { opacity: .35; transform: scale(1.045); filter: saturate(.6); }
+  to { opacity: 1; transform: scale(1); filter: saturate(1); }
+}
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.6,.2,1), transform .9s cubic-bezier(.2,.6,.2,1); }
+.reveal-delay { transition-delay: .14s; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  .experience-card { min-height: 410px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
